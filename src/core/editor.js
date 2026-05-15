@@ -2,7 +2,7 @@ const logger = require('../utils/logger')
 
 const { enableRawMode, onKeyPress } = require('../terminal/input')
 const { clearScreen, moveTerminalCursor } = require('../terminal/ansi')
-const { refreshScreen } = require('../terminal/screen')
+const { refreshScreen } = require('../renderer/screenRenderer')
 const { insertCharacter, deleteCharacter, insertNewLine } = require('../commands/editingCommands')
 const { moveEditorCursor } = require('../commands/cursorCommands')
 const { openFile, saveFile } = require('../commands/fileCommands')
@@ -33,6 +33,7 @@ function quitEditor() {
 
 function startEditor() {
     try {
+        logger.removeLogFile()
         enableRawMode()
         logger.info("Editor estarted")
 
@@ -44,8 +45,11 @@ function startEditor() {
         refreshScreen(state)
 
         onKeyPress((key) => {
+            const specialKeyRegex = /\x1b\[[0-9;]*[A-Za-z~]|\x1bO[A-Z]|\x1b|\x7f|[\x00-\x1f]/g
             try {
-                logger.debug(`key: ${JSON.stringify(key)}`)
+                if (specialKeyRegex.test(key)) {
+                    logger.debug(`Special key pressed: ${JSON.stringify(key)}`)
+                }
                 if (key === '\u0003') {
                     quitEditor()
                 } else if (

@@ -1,4 +1,4 @@
-const { scroll } = require('../core/scroll')
+const { scroll } = require('./scroll')
 const { 
     clearScreen, 
     moveTerminalCursor, 
@@ -6,7 +6,7 @@ const {
     showCursor, 
     clearLine, 
     clearScreenDown 
-} = require('./ansi')
+} = require('../terminal/ansi')
 
 
 function refreshScreen(state) {

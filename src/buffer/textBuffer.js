@@ -11,7 +11,6 @@ class TextBuffer {
 
     insertChar(x, y, char) {
         const line = this.lines[y]
-        logger.debug(`{insertChar} line: ${line}`)
 
         this.lines[y] = line.slice(0, x) +
                         char +

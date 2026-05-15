@@ -29,6 +29,13 @@ function write(level, message) {
     fs.appendFileSync(LOG_FILE, line)
 }
 
+function removeLogFile() {
+    if (fs.existsSync(LOG_FILE)) {
+        fs.unlinkSync(LOG_FILE)
+    }
+
+}
+
 function info(message) {
     write('INFO', message)
 }
@@ -48,5 +55,6 @@ module.exports = {
     info,
     debug,
     warn,
-    error
+    error,
+    removeLogFile
 }
