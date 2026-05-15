@@ -18,10 +18,15 @@ function clearLine() {
     process.stdout.write('\x1b[2K')
 }
 
+function clearScreenDown() {
+    process.stdout.write('\x1b[J')
+}
+
 module.exports = {
     clearScreen,
     moveTerminalCursor,
     hideCursor,
     showCursor,
-    clearLine
+    clearLine,
+    clearScreenDown
 }

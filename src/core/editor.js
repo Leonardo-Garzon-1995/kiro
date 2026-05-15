@@ -5,6 +5,7 @@ const { clearScreen, moveTerminalCursor } = require('../terminal/ansi')
 const { refreshScreen } = require('../terminal/screen')
 const { insertCharacter, deleteCharacter, insertNewLine } = require('../commands/editingCommands')
 const { moveEditorCursor } = require('../commands/cursorCommands')
+const { openFile, saveFile } = require('../commands/fileCommands')
 const EditorState = require('./state')
 
 const state = new EditorState()
@@ -33,9 +34,14 @@ function quitEditor() {
 function startEditor() {
     try {
         enableRawMode()
-        refreshScreen(state)
-
         logger.info("Editor estarted")
+
+        const filename = process.argv[2]
+        if (filename) {
+            openFile(state, filename)
+        }
+
+        refreshScreen(state)
 
         onKeyPress((key) => {
             try {
@@ -55,6 +61,8 @@ function startEditor() {
                     insertNewLine(state)
                 } else if (key.length === 1 && key >= ' ') {
                     insertCharacter(key, state)
+                } else if (key === '\u0013') {
+                    saveFile(state)
                 }
 
                 refreshScreen(state)

@@ -9,6 +9,15 @@ class EditorState {
         this.screenCols = process.stdout.columns
 
         this.buffer = new TextBuffer()
+
+        // File related state
+        this.filename = null
+        this.isDirty = false
+        this.statusMessage = ''
+
+        this.rowOffset = 0
+        this.colOffset = 0
+
     }
 }
 

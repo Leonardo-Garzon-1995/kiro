@@ -6,6 +6,7 @@ function insertCharacter(char, state) {
     )
 
     state.cursorX++ 
+    state.isDirty = true
 }
 
 function deleteCharacter(state) {
@@ -28,12 +29,15 @@ function deleteCharacter(state) {
         state.cursorY--
         state.cursorX = previousLength
 
+        state.isDirty = true
+
         return
     }
 
     // Normal delete
     state.buffer.deleteChar(state.cursorX, state.cursorY)
     state.cursorX--
+    state.isDirty = true
 }
 
 function insertNewLine(state) {
@@ -42,6 +46,7 @@ function insertNewLine(state) {
 
     state.cursorY++
     state.cursorX = 0
+    state.isDirty = true
 }
 
 module.exports = {

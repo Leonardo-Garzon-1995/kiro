@@ -1,4 +1,5 @@
 const logger = require('../utils/logger')
+
 class TextBuffer {
     constructor() {
         this.lines = ['']
@@ -34,7 +35,7 @@ class TextBuffer {
 
         this.lines.splice(y + 1, 0, right)
 
-        logger.debug(`{this.lines}: ${this.lines}`)
+        logger.debug(`{this.lines}: ${JSON.stringify(this.lines)}`)
     }
 } 
 

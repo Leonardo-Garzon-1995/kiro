@@ -1,9 +1,9 @@
 const fs = require('fs')
 const path = require('path')
+const { fileURLToPath } = require('url')
 
 
-
-const LOG_DIR = path.join(process.cwd(), 'logs')
+const LOG_DIR = path.join(__dirname, '..', '..', 'logs')
 const LOG_FILE = path.join(LOG_DIR, 'editor.log')
 
 function ensureLogFile() {
