@@ -1,0 +1,15 @@
+const TextBuffer = require('../buffer/textBuffer')
+
+class EditorState {
+    constructor() {
+        this.cursorX = 0
+        this.cursorY = 0
+
+        this.screenRows = process.stdout.rows 
+        this.screenCols = process.stdout.columns
+
+        this.buffer = new TextBuffer()
+    }
+}
+
+module.exports = EditorState
